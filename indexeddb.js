@@ -351,6 +351,7 @@ var mockIndexedDBStore = {
 		return mockIndexedDBCursorRequest;
 	}
 };
+mockIndexedDBStore.index = mockIndexedDBStore.openCursur;
 
 var mockIndexedDBTransaction = {
 	objectStore: function (name) {
@@ -413,7 +414,7 @@ var mockIndexedDBDatabase = {
 var mockIndexedDBOpenDBRequest = {
 	callSuccessHandler: function () {
 		if (this.onsuccess) {
-			var event = new CustomEvent("success", { bubbles: false, cancelable: true });
+			var event = { bubbles: false, cancelable: true,target:{result:mockIndexedDBDatabase}};
 			this.onsuccess(event);
 		}
 	},
